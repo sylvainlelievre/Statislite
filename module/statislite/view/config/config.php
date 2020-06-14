@@ -1,7 +1,7 @@
 <?php if($this->getData(['core','dataVersion']) > 10092){ 
 	echo '<link rel="stylesheet" href="./site/data/admin.css">';
 }
-else{ 
+else{
 	echo '<link rel="stylesheet" href="./core/layout/admin.css">';
 } ?>
 
@@ -31,22 +31,22 @@ else{
 							'help' => 'Temps minimum à passer sur une page pour valider la vue',
 							'label' => 'Temps minimum sur une page',
 							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'timePageMini'])
-						]); ?>	
-					</div>	
+						]); ?>
+					</div>
 					<div class="col4">
 					<?php echo template::select('statisliteConfigTimeVisiteMini', $module::$timeVisiteMini,[
 							'help' => 'Temps minimum à passer sur le site pour valider la visite',
 							'label' => 'Temps minimum de la visite',
 							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'timeVisiteMini'])
-						]); ?>	
-					</div>		
+						]); ?>
+					</div>
 					<div class="col4">
 					<?php echo template::select('statisliteConfigNbPageMini', $module::$nbPageMini,[
 							'help' => 'Nombre minimum de pages vues pour valider une visite. Pour le réglage \'1 page\' les contrôles de temps ne pourront pas se faire.',
 							'label' => 'Nombre minimum de pages vues',
 							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'nbPageMini'])
-						]); ?>	
-					</div>					
+						]); ?>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col4">
@@ -54,7 +54,7 @@ else{
 							'help' => 'Utilisateurs connectés à exclure des statistiques',
 							'label' => 'Utilisateurs exclus',
 							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'usersExclus'])
-						]); ?>	
+						]); ?>
 					</div>
 				</div>
 			</div>
@@ -69,7 +69,7 @@ else{
 							'help' => 'Sélection du nombre de pages vues affichées en commençant par la plus fréquente.',
 							'label' => 'Nombre de pages affichées',
 							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'nbaffipagesvues'])
-						]); ?>	
+						]); ?>
 					</div>
 
 					<!-- Affichage graphique des langues préférées -->
@@ -79,7 +79,7 @@ else{
 							'help' => 'Sélection du nombre de langues préférées affichées en commençant par la plus fréquente.',
 							'label' => 'Nombre de langues affichées',
 							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'nbaffilangues'])
-						]); ?>	
+						]); ?>
 					</div>
 
 					<!-- Affichage graphique des navigateurs -->
@@ -89,7 +89,7 @@ else{
 							'help' => 'Sélection du nombre de navigateurs affichés en commençant par le plus fréquent.',
 							'label' => 'Nombre de navigateurs affichées',
 							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'nbaffinavigateurs'])
-						]); ?>	
+						]); ?>
 					</div>
 				</div>
 				<div class="row">
@@ -100,12 +100,21 @@ else{
 							'help' => 'Sélection du nombre de systèmes d\'exploitation affichés en commençant par le plus fréquent.',
 							'label' => 'Nombre de systèmes d\'exploitation affichés',
 							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'nbaffise'])
-						]); ?>	
+						]); ?>
 					</div>
-				
+
+					<!-- Affichage graphique du pays -->
+
+					<div class="col4">
+						<?php echo template::select('statisliteConfigNbAffiPays', $module::$nbaffipays,[
+							'help' => 'Sélection du nombre de pays affichés en commençant par le plus fréquent.',
+							'label' => 'Nombre de pays affichés',
+							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'nbaffipays'])
+						]); ?>
+					</div>
 				</div>
 			</div>
-			
+
 			<div class="block">
 				<h4>Paramétrage de StatisLight : affichage chronologique des dernières dates</h4>
 				<div class="row">
@@ -114,12 +123,12 @@ else{
 							'help' => 'Choix du nombre de dates affichées en commençant par la plus récente, avec pour chacune les nombres de visites et de pages vues, les durées totale et moyenne par visite. ',
 							'label' => 'Nombre de dates affichées',
 							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'nbaffidates'])
-						]); ?>	
+						]); ?>
 					</div>
 				</div>
-				
+
 			</div>
-			
+
 			<div class="block">
 				<h4>Paramétrage de StatisLight : affichage détaillé des dernières sessions</h4>
 				<div class="row">
@@ -128,31 +137,36 @@ else{
 							'help' => 'Choix du nombre de visites affichées de manière détaillée en commençant par la plus récente. ',
 							'label' => 'Nombre de visites affichées',
 							'selected' => $this->getData(['module', $this->getUrl(0), 'config', 'nbEnregSession'])
-						]); ?>	
+						]); ?>
 					</div>
-					
-				
+					<div class="col4 offset4">
+						<p></p>
+						<?php echo template::checkbox('statisliteConfigGeolocalisation', true, 'Geolocalisation IP', [
+							'checked' => $this->getData(['module', $this->getUrl(0), 'config', 'geolocalisation']),
+							'help' => 'Case cochée l\'option de géolocalisation sera active. Vous devez renseigner la clef www.ipapi.com dans le fichier votre_site/site/file/statislight/clef_ipapi_com.txt.'
+						]); ?>
+					</div>
 				</div>
-				
+
 			</div>
-			
+
 			<div class="block">
 				<h4>Affichage des fichiers log</h4>
 				<?php if(is_file('./site/file/statislite/robots.json')){
 					echo 'Log des 200 derniers robots : ';
-					echo '<p><a href="./site/file/statislite/robots.json" onclick="window.open(this.href);return false">Fichier robots.json</a></p>';			
+					echo '<p><a href="./site/file/statislite/robots.json" onclick="window.open(this.href);return false">Fichier robots.json</a></p>';
 				}
 				if(is_file('./site/file/statislite/sessionInvalide.json')){
 					echo 'Log des 200 dernières sessions invalidées : ';
-					echo '<p><a href="./site/file/statislite/sessionInvalide.json" onclick="window.open(this.href);return false">Fichier sessionInvalide.json</a></p>';		
+					echo '<p><a href="./site/file/statislite/sessionInvalide.json" onclick="window.open(this.href);return false">Fichier sessionInvalide.json</a></p>';
 				}
 				?>
 			</div>
-			
+
 		</div>
 	</div>
-	
-	
+
+
 <?php echo template::formClose(); ?>
 <div class="moduleVersion">Module Statislite version n°
 	<?php echo $module::STATISLITE_VERSION; ?>

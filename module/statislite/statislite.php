@@ -58,7 +58,7 @@ class statislite extends common {
 		'2' => 'editeurs et administrateurs',
 		'3' => 'administrateurs'
 	];
-
+	
 	// Nombre de visites affichées dans affichage détaillé
 	public static $nbEnregSession = [
 		'5' => '5 visites',
@@ -155,12 +155,12 @@ class statislite extends common {
 				'nbPageMini' => $this->getInput('statisliteConfigNbPageMini', helper::FILTER_STRING_SHORT, true),
 				'usersExclus' => $this->getInput('statisliteConfigUsersExclus', helper::FILTER_STRING_SHORT, true),
 				'nbEnregSession' => $this->getInput('statisliteConfigNbEnregSession', helper::FILTER_STRING_SHORT, true),
-				'geolocalisation' => false, //$this->getInput('statisliteConfigGeolocalisation', helper::FILTER_BOOLEAN),
+				'geolocalisation' => $this->getInput('statisliteConfigGeolocalisation', helper::FILTER_BOOLEAN),
 				'nbaffipagesvues' => $this->getInput('statisliteConfigNbAffiPagesVues'), 
 				'nbaffilangues' => $this->getInput('statisliteConfigNbAffiLangues'), 
 				'nbaffinavigateurs' => $this->getInput('statisliteConfigNbAffiNavigateurs'),
 				'nbaffise' => $this->getInput('statisliteConfigNbAffiSe'),
-				'nbaffipays' => '0', //$this->getInput('statisliteConfigNbAffiPays'),
+				'nbaffipays' => $this->getInput('statisliteConfigNbAffiPays'),
 				'nbaffidates' => $this->getInput('statisLiteConfigNbAffiDates'),
 				'config' => true
 			]]);
@@ -202,7 +202,7 @@ class statislite extends common {
 				'nbaffilangues' => '5',
 				'nbaffinavigateurs' => '5',
 				'nbaffise' => '5',
-				'nbaffipays' => '0',
+				'nbaffipays' => '5',
 				'nbaffidates' => '5',
 				'config' => false
 			]]);
